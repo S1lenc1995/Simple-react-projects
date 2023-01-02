@@ -3,11 +3,12 @@
     justify-content: center;
 }
 .task-massage{
-    width: 400px;
+    width: 500px;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 20px;
     transition: .5s;
+    border-color: #6c757d;
     &::placeholder {
         font-size: 20px;
         transition: color 0.1s ease-in-out;
@@ -48,4 +49,8 @@
         transform: translateY(5px);
         transition: .2s; 
       }
+}
+
+.form{
+    display: flex;
 }

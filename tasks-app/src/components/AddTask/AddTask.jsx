@@ -1,6 +1,7 @@
 import React from 'react'
 import { useContext, useRef, useState } from 'react'
 import { TaskContext } from '../../context'
+import api from '../../api'
 
 import './AddTask.scss'
 
@@ -10,12 +11,17 @@ const AddTask= () =>{
     const {addTask} = useContext(TaskContext)
     const [value, setValue] = useState('')
 
-    const handlerAddTodo = (e) =>{
+    const handlerAddTodo = async (e) =>{
         e.preventDefault();
         if(value.length ===0){
             return null
         }
+
+        const taskObj = await api.createTask(value)
+        addTask(taskObj)
         setValue('');
+    
+
     }
 
     const handlerUpdate =(e)=>{
@@ -23,7 +29,7 @@ const AddTask= () =>{
     }
     return(
         <div className='addTask'>
-            <form onSubmit={ handlerAddTodo}>
+            <form className='form' onSubmit={ handlerAddTodo}>
                 <input type="text"
                 placeholder="Enter task"
                 className='task-massage'
