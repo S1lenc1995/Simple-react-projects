@@ -1,0 +1,25 @@
+.question-block{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 20px;
+    text-align: center;
+}
+
+.question{
+    margin-top: 50px;
+}
+
+.answer-block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer{
+    padding: 10px;
+    width: fit-content;
+    &:focus{
+        background-color: aqua;
+    }
+}
