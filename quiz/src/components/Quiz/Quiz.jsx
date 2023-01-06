@@ -7,7 +7,7 @@ import Timer from "../Timer/Timer.jsx";
 import "./Quiz.scss"
 
 const Quiz = ()=>{
-    const {score, setScore,partOfGame, setPartOfGame} = useContext(QuizeContext)
+    const {score, setScore,partOfGame, setPartOfGame, stopTimer} = useContext(QuizeContext)
     const[numberOfQuestion, setNunberOfQuestion] = useState(0)
     const[chosenAnswer, setChosenAnswer] = useState('')
 
@@ -20,6 +20,14 @@ const Quiz = ()=>{
         console.log(score)
     }
 
+    const finish =()=>{
+        if(chosenAnswer === QuestionList[numberOfQuestion].answer){
+            setScore(score+1)
+        }
+        stopTimer()
+        setPartOfGame('finish') 
+    }
+
     return(
         <div className="question-block">
             <Timer/>
@@ -30,7 +38,7 @@ const Quiz = ()=>{
                     <button className="answer" onClick={()=> setChosenAnswer("B")}>{QuestionList[numberOfQuestion].optionB}</button>
                     <button className="answer" onClick={()=> setChosenAnswer("C")}>{QuestionList[numberOfQuestion].optionC}</button>
                     <button className="answer" onClick={()=> setChosenAnswer("D")}>{QuestionList[numberOfQuestion].optionD}</button>
-                    {numberOfQuestion == QuestionList.length-1 ?(<button onClick={()=> setPartOfGame('finish')}>finish</button>) : <button onClick={()=>changeNumberOfQuestion()}>Next Question</button> }
+                    {numberOfQuestion == QuestionList.length-1 ?(<button className="btn-next-question" onClick={()=>finish()}>Finish</button>) : <button className="btn-next-question" onClick={()=>changeNumberOfQuestion()}>Next Question</button> }
                   
                 </div>
         </div>    

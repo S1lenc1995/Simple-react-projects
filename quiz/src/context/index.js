@@ -7,13 +7,13 @@ const QuizProvider =({children}) =>{
     const [partOfGame, setPartOfGame] = useState('start')
     const [name, setName] = useState('')
     const [score, setScore] = useState(0)
+    const [finishTime, setFinishTime] = useState()
     const [time, setTime] = useState({ms:0, s:0, m:0})
     
 
     const startTimer = ()=>{
         run()
-        setInterval(run,10)
-        console.log('g')
+        setFinishTime(setInterval(run,10))
     }
 
     let updateMs = time.ms
@@ -33,11 +33,12 @@ const QuizProvider =({children}) =>{
         return setTime({ms:updateMs, s:updateS, m:updateM })
     }
 
-
-
-
+    const stopTimer = ()=>{
+        clearInterval(finishTime)
+    }
+    
     return(
-        <QuizeContext.Provider value={{partOfGame, setPartOfGame, setName, name, score, setScore, time, setTime,  startTimer }}>
+        <QuizeContext.Provider value={{partOfGame, setPartOfGame, setName, name, score, setScore, time, setTime,  startTimer, stopTimer }}>
             {children}
         </QuizeContext.Provider>
     )
